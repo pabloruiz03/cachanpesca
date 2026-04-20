@@ -1,0 +1,13 @@
+# App QR albarán + generador_qr
+pypdf>=4.0
+qrcode[pil]>=7.0
+Pillow>=10.0
+reportlab>=4.0
+tkcalendar>=1.6.1
+
+# Capturar etiquetas (requiere pywin32 para comunicación con spooler)
+pywin32>=306
+pywin32-ctypes>=0.2.0
+
+# Build e instalación
+pyinstaller>=6.0

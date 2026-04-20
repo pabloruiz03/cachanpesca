@@ -1,0 +1,555 @@
+[
+  {
+    "job_id": 350,
+    "timestamp": "2026-04-18T17:31:17",
+    "datos": {
+      "producto": "GALLINETA",
+      "nombre_cientifico": "Helicolenus Dactylopterus",
+      "arte_pesca": "REDES DE TIRO",
+      "zona_captura": "Fao 81 Oceano Pacífico",
+      "presentacion": "FILETEADO FIS              SIN PIEL",
+      "producto_tipo": "FRESCO",
+      "fecha_expedicion": "18-04-2026",
+      "peso_neto": 8.0,
+      "lote": "180426BRF",
+      "buque": "VARIOS",
+      "codigo_plu": "00106",
+      "cliente": "ALMACEN"
+    }
+  },
+  {
+    "job_id": 351,
+    "timestamp": "2026-04-18T17:49:25",
+    "datos": {
+      "producto": "BESUGO",
+      "nombre_cientifico": "Paguellus Bogaraveo",
+      "arte_pesca": "REDES DE TIRO",
+      "zona_captura": "Fao 81 Oceano Pacífico",
+      "presentacion": "FILETEADO FIS              SIN PIEL",
+      "producto_tipo": "FRESCO",
+      "fecha_expedicion": "18-04-2026",
+      "peso_neto": 8.0,
+      "lote": "180426SBR",
+      "buque": "VARIOS",
+      "codigo_plu": "00106",
+      "cliente": "ALMACEN"
+    }
+  },
+  {
+    "job_id": 352,
+    "timestamp": "2026-04-18T17:53:26",
+    "datos": {
+      "producto": "HUESOS RAPE",
+      "nombre_cientifico": "Lophius spp",
+      "arte_pesca": "REDES DE TIRO",
+      "zona_captura": "Fao 81 Oceano Pacífico",
+      "presentacion": "FILETEADO FIS              SIN PIEL",
+      "producto_tipo": "FRESCO",
+      "fecha_expedicion": "18-04-2026",
+      "peso_neto": 8.0,
+      "lote": "180426MNZ",
+      "buque": "VARIOS",
+      "codigo_plu": "00106",
+      "cliente": "ALMACEN"
+    }
+  },
+  {
+    "job_id": 353,
+    "timestamp": "2026-04-18T17:53:43",
+    "datos": {
+      "producto": "POTA",
+      "nombre_cientifico": "Illex Illecebrosus",
+      "arte_pesca": "REDES DE TIRO",
+      "zona_captura": "Fao 81 Oceano Pacífico",
+      "presentacion": "FILETEADO FIS              SIN PIEL",
+      "producto_tipo": "FRESCO",
+      "fecha_expedicion": "18-04-2026",
+      "peso_neto": 8.0,
+      "lote": "180426SQI",
+      "buque": "VARIOS",
+      "codigo_plu": "00106",
+      "cliente": "JUANA Mª SAN MARTIN AHECHU"
+    }
+  },
+  {
+    "job_id": 354,
+    "timestamp": "2026-04-18T17:57:11",
+    "datos": {
+      "producto": "POTA",
+      "nombre_cientifico": "Illex Illecebrosus",
+      "arte_pesca": "REDES DE TIRO",
+      "zona_captura": "Fao 81 Oceano Pacífico",
+      "presentacion": "FILETEADO FIS              SIN PIEL",
+      "producto_tipo": "FRESCO",
+      "fecha_expedicion": "18-04-2026",
+      "peso_neto": 6.0,
+      "lote": "180426SQI",
+      "buque": "VARIOS",
+      "codigo_plu": "00106",
+      "cliente": "JUANA Mª SAN MARTIN AHECHU"
+    }
+  },
+  {
+    "job_id": 355,
+    "timestamp": "2026-04-18T17:58:57",
+    "datos": {
+      "producto": "BROTOLA DE ROCA",
+      "nombre_cientifico": "Physis  Physcis",
+      "arte_pesca": "REDES DE TIRO",
+      "zona_captura": "Fao 81 Oceano Pacífico",
+      "presentacion": "FILETEADO FIS              SIN PIEL",
+      "producto_tipo": "FRESCO",
+      "fecha_expedicion": "18-04-2026",
+      "peso_neto": 6.0,
+      "lote": "180426FOR",
+      "buque": "VARIOS",
+      "codigo_plu": "00106",
+      "cliente": "JUANA Mª SAN MARTIN AHECHU"
+    }
+  },
+  {
+    "job_id": 356,
+    "timestamp": "2026-04-18T18:24:16",
+    "datos": {
+      "producto": "CORUJO",
+      "nombre_cientifico": "Scophthalmus Rhombus",
+      "arte_pesca": "REDES DE TIRO",
+      "zona_captura": "Fao 81 Oceano Pacífico",
+      "presentacion": "FILETEADO FIS              SIN PIEL",
+      "producto_tipo": "FRESCO",
+      "fecha_expedicion": "18-04-2026",
+      "peso_neto": 6.0,
+      "lote": "180426BLL",
+      "buque": "VARIOS",
+      "codigo_plu": "00106",
+      "especie_3": "USB",
+      "cliente": "JUANA Mª SAN MARTIN AHECHU"
+    }
+  },
+  {
+    "job_id": 357,
+    "timestamp": "2026-04-18T18:24:27",
+    "datos": {
+      "producto": "MERLUZA FILETES",
+      "nombre_cientifico": "Merluccius Merluccius",
+      "arte_pesca": "REDES DE TIRO",
+      "zona_captura": "Fao 81 Oceano Pacífico",
+      "presentacion": "FILETEADO FIS              SIN PIEL",
+      "producto_tipo": "FRESCO",
+      "fecha_expedicion": "18-04-2026",
+      "peso_neto": 6.0,
+      "lote": "180426HKE",
+      "buque": "VARIOS",
+      "codigo_plu": "00106",
+      "especie_3": "USB",
+      "cliente": "JUANA Mª SAN MARTIN AHECHU"
+    }
+  },
+  {
+    "job_id": 358,
+    "timestamp": "2026-04-18T18:24:35",
+    "datos": {
+      "producto": "CHOCO",
+      "nombre_cientifico": "Sepia Offiicinalis",
+      "arte_pesca": "REDES DE TIRO",
+      "zona_captura": "Fao 81 Oceano Pacífico",
+      "presentacion": "FILETEADO FIS              SIN PIEL",
+      "producto_tipo": "FRESCO",
+      "fecha_expedicion": "18-04-2026",
+      "peso_neto": 6.0,
+      "lote": "180426CTC",
+      "buque": "VARIOS",
+      "codigo_plu": "00106",
+      "especie_3": "USB",
+      "cliente": "JUANA Mª SAN MARTIN AHECHU"
+    }
+  },
+  {
+    "job_id": 359,
+    "timestamp": "2026-04-18T18:25:20",
+    "datos": {
+      "producto": "MARAGOTA",
+      "nombre_cientifico": "LABRUS BERGYLTA",
+      "arte_pesca": "REDES DE TIRO",
+      "zona_captura": "Fao 81 Oceano Pacífico",
+      "presentacion": "FILETEADO FIS              SIN PIEL",
+      "producto_tipo": "FRESCO",
+      "fecha_expedicion": "18-04-2026",
+      "peso_neto": 6.0,
+      "lote": "180426USB",
+      "buque": "VARIOS",
+      "codigo_plu": "00106",
+      "especie_3": "USB",
+      "cliente": "JUANA Mª SAN MARTIN AHECHU"
+    }
+  },
+  {
+    "job_id": 360,
+    "timestamp": "2026-04-18T18:30:41",
+    "datos": {
+      "producto": "BOQUERON",
+      "nombre_cientifico": "Engraulis Spp",
+      "arte_pesca": "REDES DE TIRO",
+      "zona_captura": "Fao 81 Oceano Pacífico",
+      "presentacion": "FILETEADO FIS              SIN PIEL",
+      "producto_tipo": "FRESCO",
+      "fecha_expedicion": "18-04-2026",
+      "peso_neto": 6.0,
+      "lote": "180426ANE",
+      "buque": "VARIOS",
+      "codigo_plu": "00106",
+      "especie_3": "USB",
+      "cliente": "JUANA Mª SAN MARTIN AHECHU"
+    }
+  },
+  {
+    "job_id": 361,
+    "timestamp": "2026-04-18T18:31:53",
+    "datos": {
+      "producto": "GALLANO",
+      "nombre_cientifico": "Labrus mixtus",
+      "arte_pesca": "REDES DE TIRO",
+      "zona_captura": "Fao 81 Oceano Pacífico",
+      "presentacion": "FILETEADO FIS              SIN PIEL",
+      "producto_tipo": "FRESCO",
+      "fecha_expedicion": "18-04-2026",
+      "peso_neto": 6.0,
+      "lote": "180426",
+      "buque": "VARIOS",
+      "codigo_plu": "00106",
+      "especie_3": "",
+      "cliente": "JUANA Mª SAN MARTIN AHECHU"
+    }
+  },
+  {
+    "job_id": 362,
+    "timestamp": "2026-04-18T18:33:46",
+    "datos": {
+      "producto": "PALOMETA (JAPUTA)",
+      "nombre_cientifico": "Brama Brama",
+      "arte_pesca": "REDES DE TIRO",
+      "zona_captura": "Fao 81 Oceano Pacífico",
+      "presentacion": "FILETEADO FIS              SIN PIEL",
+      "producto_tipo": "FRESCO",
+      "fecha_expedicion": "18-04-2026",
+      "peso_neto": 6.0,
+      "lote": "180426POA",
+      "buque": "VARIOS",
+      "codigo_plu": "00106",
+      "especie_3": "POA",
+      "cliente": "JUANA Mª SAN MARTIN AHECHU"
+    }
+  },
+  {
+    "job_id": 363,
+    "timestamp": "2026-04-18T18:33:55",
+    "datos": {
+      "producto": "CHOPA",
+      "nombre_cientifico": "Spondy hosoma centharus",
+      "arte_pesca": "REDES DE TIRO",
+      "zona_captura": "Fao 81 Oceano Pacífico",
+      "presentacion": "FILETEADO FIS              SIN PIEL",
+      "producto_tipo": "FRESCO",
+      "fecha_expedicion": "18-04-2026",
+      "peso_neto": 6.0,
+      "lote": "180426",
+      "buque": "VARIOS",
+      "codigo_plu": "00106",
+      "especie_3": "USB",
+      "cliente": "JUANA Mª SAN MARTIN AHECHU"
+    }
+  },
+  {
+    "job_id": 364,
+    "timestamp": "2026-04-18T18:34:03",
+    "datos": {
+      "producto": "DORADA",
+      "nombre_cientifico": "Sparus Aurata",
+      "arte_pesca": "REDES DE TIRO",
+      "zona_captura": "Fao 81 Oceano Pacífico",
+      "presentacion": "FILETEADO FIS              SIN PIEL",
+      "producto_tipo": "FRESCO",
+      "fecha_expedicion": "18-04-2026",
+      "peso_neto": 6.0,
+      "lote": "180426SBG",
+      "buque": "VARIOS",
+      "codigo_plu": "00106",
+      "especie_3": "SBG",
+      "cliente": "JUANA Mª SAN MARTIN AHECHU"
+    }
+  },
+  {
+    "job_id": 367,
+    "timestamp": "2026-04-18T18:34:31",
+    "datos": {
+      "producto": "GALLINETA",
+      "nombre_cientifico": "Helicolenus Dactylopterus",
+      "arte_pesca": "REDES DE TIRO",
+      "zona_captura": "Fao 81 Oceano Pacífico",
+      "presentacion": "FILETEADO FIS              SIN PIEL",
+      "producto_tipo": "FRESCO",
+      "fecha_expedicion": "18-04-2026",
+      "peso_neto": 6.0,
+      "lote": "180426BRF",
+      "buque": "VARIOS",
+      "codigo_plu": "00106",
+      "especie_3": "BRF",
+      "cliente": "JUANA Mª SAN MARTIN AHECHU"
+    }
+  },
+  {
+    "job_id": 368,
+    "timestamp": "2026-04-18T18:34:41",
+    "datos": {
+      "producto": "RUBIO",
+      "nombre_cientifico": "Trigla spp",
+      "arte_pesca": "REDES DE TIRO",
+      "zona_captura": "Fao 81 Oceano Pacífico",
+      "presentacion": "FILETEADO FIS              SIN PIEL",
+      "producto_tipo": "FRESCO",
+      "fecha_expedicion": "18-04-2026",
+      "peso_neto": 6.0,
+      "lote": "180426GUY",
+      "buque": "VARIOS",
+      "codigo_plu": "00106",
+      "especie_3": "GUY",
+      "cliente": "MAYOL MESQUIDA, S.L."
+    }
+  },
+  {
+    "job_id": 369,
+    "timestamp": "2026-04-18T18:34:45",
+    "datos": {
+      "producto": "POTA",
+      "nombre_cientifico": "Illex Illecebrosus",
+      "arte_pesca": "REDES DE TIRO",
+      "zona_captura": "Fao 81 Oceano Pacífico",
+      "presentacion": "FILETEADO FIS              SIN PIEL",
+      "producto_tipo": "FRESCO",
+      "fecha_expedicion": "18-04-2026",
+      "peso_neto": 6.0,
+      "lote": "180426SQI",
+      "buque": "VARIOS",
+      "codigo_plu": "00106",
+      "especie_3": "SQI",
+      "cliente": "MAYOL MESQUIDA, S.L."
+    }
+  },
+  {
+    "job_id": 370,
+    "timestamp": "2026-04-18T18:34:48",
+    "datos": {
+      "producto": "POTA",
+      "nombre_cientifico": "Illex Illecebrosus",
+      "arte_pesca": "REDES DE TIRO",
+      "zona_captura": "Fao 81 Oceano Pacífico",
+      "presentacion": "FILETEADO FIS              SIN PIEL",
+      "producto_tipo": "FRESCO",
+      "fecha_expedicion": "18-04-2026",
+      "peso_neto": 6.0,
+      "lote": "180426SQI",
+      "buque": "VARIOS",
+      "codigo_plu": "00106",
+      "especie_3": "SQI",
+      "cliente": "MAYOL MESQUIDA, S.L."
+    }
+  },
+  {
+    "job_id": 371,
+    "timestamp": "2026-04-19T11:56:11",
+    "datos": {
+      "producto": "MERLUZA",
+      "nombre_cientifico": "Merluccius Merluccius",
+      "arte_pesca": "REDES DE TIRO",
+      "zona_captura": "Fao 81 Oceano Pacífico",
+      "presentacion": "FILETEADO FIS              SIN PIEL",
+      "producto_tipo": "FRESCO",
+      "fecha_expedicion": "19-04-2026",
+      "peso_neto": 6.0,
+      "lote": "190426HKE",
+      "buque": "VARIOS",
+      "especie_3": "HKE",
+      "cliente": "MAYOL MESQUIDA, S.L."
+    }
+  },
+  {
+    "job_id": 372,
+    "timestamp": "2026-04-19T12:00:58",
+    "datos": {
+      "producto": "MERLUZA",
+      "nombre_cientifico": "Merluccius Merluccius",
+      "arte_pesca": "REDES DE TIRO",
+      "zona_captura": "Fao 81 Oceano Pacífico",
+      "presentacion": "FILETEADO FIS              SIN PIEL",
+      "producto_tipo": "FRESCO",
+      "fecha_expedicion": "19-04-2026",
+      "peso_neto": 9.0,
+      "lote": "190426HKE",
+      "buque": "VARIOS",
+      "especie_3": "HKE",
+      "cliente": "MAYOL MESQUIDA, S.L."
+    }
+  },
+  {
+    "job_id": 373,
+    "timestamp": "2026-04-19T12:01:57",
+    "datos": {
+      "producto": "MERLUZA",
+      "nombre_cientifico": "Merluccius Merluccius",
+      "arte_pesca": "REDES DE TIRO",
+      "zona_captura": "Fao 81 Oceano Pacífico",
+      "presentacion": "EVISCERADO GUH        SIN CABEZA",
+      "producto_tipo": "FRESCO",
+      "fecha_expedicion": "19-04-2026",
+      "peso_neto": 9.0,
+      "lote": "190426HKE",
+      "buque": "VARIOS",
+      "especie_3": "HKE",
+      "cliente": "MAYOL MESQUIDA, S.L."
+    }
+  },
+  {
+    "job_id": 374,
+    "timestamp": "2026-04-19T12:02:49",
+    "datos": {
+      "producto": "MERLUZA",
+      "nombre_cientifico": "Merluccius Merluccius",
+      "arte_pesca": "REDES DE TIRO",
+      "zona_captura": "Fao 27.IXb Aguas portuguesas Oeste",
+      "presentacion": "EVISCERADO GUH        SIN CABEZA",
+      "producto_tipo": "FRESCO",
+      "fecha_expedicion": "19-04-2026",
+      "peso_neto": 9.0,
+      "lote": "190426HKE",
+      "buque": "VARIOS",
+      "especie_3": "HKE",
+      "cliente": "MAYOL MESQUIDA, S.L."
+    }
+  },
+  {
+    "job_id": 375,
+    "timestamp": "2026-04-19T12:03:45",
+    "datos": {
+      "producto": "SARGO",
+      "nombre_cientifico": "Diplodus Sargus",
+      "arte_pesca": "REDES DE TIRO",
+      "zona_captura": "Fao 27.IXb Aguas portuguesas Oeste",
+      "presentacion": "EVISCERADO GUH        SIN CABEZA",
+      "producto_tipo": "FRESCO",
+      "fecha_expedicion": "19-04-2026",
+      "peso_neto": 9.0,
+      "lote": "190426SWA",
+      "buque": "VARIOS",
+      "especie_3": "SWA",
+      "cliente": "MAYOL MESQUIDA, S.L."
+    }
+  },
+  {
+    "job_id": 376,
+    "timestamp": "2026-04-19T12:04:28",
+    "datos": {
+      "producto": "SARGO",
+      "nombre_cientifico": "Diplodus Sargus",
+      "arte_pesca": "REDES DE TIRO",
+      "zona_captura": "Fao 27.IXb Aguas portuguesas Oeste",
+      "presentacion": "EVISCERADO GUH        SIN CABEZA",
+      "producto_tipo": "FRESCO",
+      "fecha_expedicion": "19-04-2026",
+      "peso_neto": 9.0,
+      "lote": "190426SWA",
+      "buque": "VARIOS",
+      "especie_3": "SWA",
+      "cliente": "MAYOL MESQUIDA, S.L."
+    }
+  },
+  {
+    "job_id": 377,
+    "timestamp": "2026-04-19T12:04:46",
+    "datos": {
+      "producto": "HUEVAS MERLUZA",
+      "nombre_cientifico": "Merluccius Merluccius",
+      "arte_pesca": "REDES DE TIRO",
+      "zona_captura": "Fao 27.IXb Aguas portuguesas Oeste",
+      "presentacion": "EVISCERADO GUH        SIN CABEZA",
+      "producto_tipo": "FRESCO",
+      "fecha_expedicion": "19-04-2026",
+      "peso_neto": 9.0,
+      "lote": "190426HKE",
+      "buque": "VARIOS",
+      "especie_3": "HKE",
+      "cliente": "BODEGON LOUREIRO PLAYA, S.L."
+    }
+  },
+  {
+    "job_id": 378,
+    "timestamp": "2026-04-19T12:05:02",
+    "datos": {
+      "producto": "GALLINETA",
+      "nombre_cientifico": "Helicolenus Dactylopterus",
+      "arte_pesca": "REDES DE TIRO",
+      "zona_captura": "Fao 27.IXb Aguas portuguesas Oeste",
+      "presentacion": "EVISCERADO GUH        SIN CABEZA",
+      "producto_tipo": "FRESCO",
+      "fecha_expedicion": "19-04-2026",
+      "peso_neto": 9.0,
+      "lote": "190426BRF",
+      "buque": "VARIOS",
+      "especie_3": "BRF",
+      "cliente": "JUANA Mª SAN MARTIN AHECHU"
+    }
+  },
+  {
+    "job_id": 379,
+    "timestamp": "2026-04-19T12:05:32",
+    "datos": {
+      "producto": "LENGUADINA/MENDO",
+      "nombre_cientifico": "Glyptocephalus cynoglossus",
+      "arte_pesca": "REDES DE TIRO",
+      "zona_captura": "Fao 27.IXb Aguas portuguesas Oeste",
+      "presentacion": "EVISCERADO GUH        SIN CABEZA",
+      "producto_tipo": "FRESCO",
+      "fecha_expedicion": "19-04-2026",
+      "peso_neto": 9.0,
+      "lote": "190426WIT",
+      "buque": "VARIOS",
+      "especie_3": "WIT",
+      "cliente": "MAYOL MESQUIDA, S.L."
+    }
+  },
+  {
+    "job_id": 380,
+    "timestamp": "2026-04-19T12:05:47",
+    "datos": {
+      "producto": "MERO",
+      "nombre_cientifico": "Epinephelus Marginatus",
+      "arte_pesca": "REDES DE TIRO",
+      "zona_captura": "Fao 27.IXb Aguas portuguesas Oeste",
+      "presentacion": "EVISCERADO GUH        SIN CABEZA",
+      "producto_tipo": "FRESCO",
+      "fecha_expedicion": "19-04-2026",
+      "peso_neto": 9.0,
+      "lote": "190426GPD",
+      "buque": "VARIOS",
+      "especie_3": "GPD",
+      "cliente": "MAYOL MESQUIDA, S.L."
+    }
+  },
+  {
+    "job_id": 381,
+    "timestamp": "2026-04-19T12:06:45",
+    "datos": {
+      "producto": "MERO",
+      "nombre_cientifico": "Epinephelus Marginatus",
+      "arte_pesca": "REDES DE TIRO",
+      "zona_captura": "Fao 27.IXb Aguas portuguesas Oeste",
+      "presentacion": "EVISCERADO GUH        SIN CABEZA",
+      "producto_tipo": "FRESCO",
+      "fecha_expedicion": "19-04-2026",
+      "peso_neto": 9.0,
+      "lote": "190426GPD",
+      "buque": "VARIOS",
+      "especie_3": "GPD",
+      "cliente": "BODEGON LOUREIRO PLAYA, S.L."
+    }
+  }
+]

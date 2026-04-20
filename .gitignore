@@ -1,0 +1,54 @@
+# Configuración con credenciales (crear wp_config.json desde wp_config.json.example)
+wp_config.json
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+*.egg
+*.pyc
+
+# Entorno virtual
+venv/
+.env
+
+# Archivos temporales
+*.tmp
+*.log
+*.bak
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Archivos del proyecto original que no sirven
+source/txt/
+source/por/
+source/Def/
+source/Conf/
+source/TxtComercio/
+source/radar_*.jsonl
+source/radar_*.py
+source/spooler_*.py
+source/leer_spooler*.py
+source/servidor_print*.py
+source/hook_*.py
+source/analizar_spl.py
+source/capturar_raw.py
+source/capturar_simple.py
+source/capturar_etiquetas_final.py
+source/capturar_etiquetas_limpio.py
+source/monitor_print*.py
+source/monitor_etiquetas*.py
+source/scratch/
+source/art*_Sql.txt
+source/reservas_Sql.txt
+source/my.ini
+source/my.cnf
+source/cvcaf.xrc
+source/ImportXlsx1.xml
+source/bridge_*.py
+source/bridge_config.example.json
+source/launchers/
