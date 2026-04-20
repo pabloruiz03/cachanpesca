@@ -30,10 +30,10 @@ except ImportError:
 # ============================================================================
 
 # Ruta a la carpeta HVETIQ CACHANPESCA (donde están RES00, art2_Sql.txt, etc.)
-DATOS_DIR = Path(r"C:\Users\Pablo\Downloads\rosi\HVETIQ CACHANPESCA")
+DATOS_DIR = Path(r"C:\HVETIQ CACHANPESCA")
 
 # Ruta donde se guardarán las etiquetas.json
-SALIDA_DIR = Path(r"C:\Users\Pablo\Downloads\CACHANPESCA_Installer\etiquetas_json")
+SALIDA_DIR = DATOS_DIR / "etiquetas_json"
 
 # Nombre de la impresora a monitorizar (parcial, busca.contains())
 IMPRESORA_NOMBRE = "Godex"
