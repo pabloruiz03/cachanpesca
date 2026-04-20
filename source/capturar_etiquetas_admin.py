@@ -3,6 +3,10 @@
 """
 Monitor de etiquetas - EJECUTAR COMO ADMINISTRADOR.
 Escucha trabajos de impresion y guarda cada etiqueta en etiquetas.json.
+
+Uso:
+    pip install pywin32
+    python capturar_etiquetas_admin.py
 """
 
 import sys
@@ -10,7 +14,6 @@ import os
 import time
 import datetime
 import json
-import hashlib
 import re
 import xml.etree.ElementTree as ET
 from pathlib import Path
@@ -18,70 +21,55 @@ from pathlib import Path
 try:
     import win32com.client
 except ImportError:
-    print("[ERROR] pywin32 no instalado")
+    print("ERROR: pywin32 no instalado. Ejecuta: pip install pywin32")
     sys.exit(1)
 
 
-def obtener_directorio_datos():
-    """
-    Obtiene el directorio donde están los archivos de datos (RES, SQL, etc).
-    Siempre devuelve la carpeta HVETIQ CACHANPESCA, sin importar dónde esté el .exe.
-    """
-    hv_dirs = [
-        Path(r"C:\Users\Pablo\Downloads\rosi\HVETIQ CACHANPESCA"),
-        Path(r"C:\Users\Pablo\Downloads\HVETIQ CACHANPESCA"),
-        Path(r"C:\HVETIQ CACHANPESCA"),
-    ]
-    # Buscar la carpeta que contenga los archivos de datos
-    for candidate in hv_dirs:
-        if candidate.exists() and (candidate / "RES00").exists():
-            return candidate
-    # Si no encuentra, fallback al directorio del exe
-    if getattr(sys, 'frozen', False):
-        return Path(sys.executable).parent
-    return Path(__file__).parent.resolve()
+# ============================================================================
+# CONFIGURACION - Edita estos valores según tu instalación
+# ============================================================================
 
+# Ruta a la carpeta HVETIQ CACHANPESCA (donde están RES00, art2_Sql.txt, etc.)
+DATOS_DIR = Path(r"C:\Users\Pablo\Downloads\rosi\HVETIQ CACHANPESCA")
 
-# Directorio de datos (siempre la carpeta HVETIQ con archivos RES, SQL, etc)
-PROGRAMA_DIR = obtener_directorio_datos()
+# Ruta donde se guardarán las etiquetas.json
+SALIDA_DIR = Path(r"C:\Users\Pablo\Downloads\CACHANPESCA_Installer\etiquetas_json")
+
+# Nombre de la impresora a monitorizar (parcial, busca.contains())
+IMPRESORA_NOMBRE = "Godex"
 
 # ============================================================================
-# RUTAS DE ETIQUETAS - Configurable para red local
-# ============================================================================
-# Para usar en RED: comparte la carpeta etiquetas_json en el PC 1 y pon
-# la ruta UNC aquí en el PC 2.
-# Formato: r"\\NOMBRE_PC\HVETIQ CACHANPESCA\etiquetas_json"
-#
-# El programa busca la carpeta HVETIQ CACHANPESCA en varios sitios posibles.
-# Para modo red, cambiar REDE_ETIQUETAS_DIR.
 
-def obtener_directorio_etiquetas():
-    """Busca CACHANPESCA_Installer y devuelve etiquetas_json dentro."""
-    installer_dirs = [
-        Path(r"C:\Users\Pablo\Downloads\CACHANPESCA_Installer"),
-        Path(r"C:\Users\Pablo\CACHANPESCA_Installer"),
-        Path(r"C:\CACHANPESCA_Installer"),
-    ]
-    for candidate in installer_dirs:
-        if candidate.exists():
-            return candidate / "etiquetas_json"
-    # Fallback: usar el directorio del exe
-    if getattr(sys, 'frozen', False):
-        base = Path(sys.executable).parent
-    else:
-        base = Path(__file__).parent.resolve()
-    return base / "etiquetas_json"
-
-REDE_ETIQUETAS_DIR = Path(r"\\PC-CAPTURA\CACHANPESCA_Installer\etiquetas_json")
-
-SALIDA_DIR = obtener_directorio_etiquetas()
+# Crear directorios
 SALIDA_DIR.mkdir(parents=True, exist_ok=True)
 
 ETIQUETAS_JSON = SALIDA_DIR / "etiquetas.json"
 PROCESADOS_FILE = SALIDA_DIR / ".jobs_procesados.json"
 
+
+def safe_print(msg):
+    """Imprime sin errores de encoding."""
+    try:
+        print(msg, flush=True)
+    except UnicodeEncodeError:
+        print(msg.encode("utf-8", errors="replace").decode("utf-8"), flush=True)
+
+
+# ============================================================================
+# RUTAS DE DATOS LOCALES
+# ============================================================================
+
+ART2_SQL = DATOS_DIR / "art2_Sql.txt"
+ETIQREG_SQL = DATOS_DIR / "etiqreg_Sql.txt"
+MESA_1_TXT = DATOS_DIR / "Mesa_1.txt"
+CLIENTES_SQL = DATOS_DIR / "clientes_Sql.txt"
+
+
+# ============================================================================
+# CARGAR JOBS PROCESADOS
+# ============================================================================
+
 def cargar_jobs_procesados():
-    """Carga el set de jobs ya procesados desde archivo."""
     try:
         if PROCESADOS_FILE.exists():
             with open(PROCESADOS_FILE, 'r', encoding='utf-8') as f:
@@ -92,55 +80,16 @@ def cargar_jobs_procesados():
     return set()
 
 def guardar_jobs_procesados(jobs_set):
-    """Guarda el set de jobs procesados en archivo."""
     try:
         with open(PROCESADOS_FILE, 'w', encoding='utf-8') as f:
             json.dump({"jobs": list(jobs_set)}, f)
     except:
         pass
 
-# Bases de datos del programa (relative to PROGRAMA_DIR)
-ART2_SQL = PROGRAMA_DIR / "art2_Sql.txt"
-ETIQREG_SQL = PROGRAMA_DIR / "etiqreg_Sql.txt"
-MESA_1_TXT = PROGRAMA_DIR / "Mesa_1.txt"
-CLIENTES_SQL = PROGRAMA_DIR / "clientes_Sql.txt"
 
-
-def safe_print(msg, *, flush=True):
-    """Imprime en consola; flush=True para ver líneas al momento en cmd (sin esperar Ctrl+C)."""
-    try:
-        print(msg, flush=flush)
-    except UnicodeEncodeError:
-        enc = sys.stdout.encoding or "utf-8"
-        print(msg.encode(enc, errors="replace").decode(enc), flush=flush)
-
-
-def configurar_salida_consola_en_vivo() -> None:
-    """Evita que cmd acumule texto en búfer (salida aparente solo al interrumpir)."""
-    try:
-        if hasattr(sys.stdout, "reconfigure"):
-            sys.stdout.reconfigure(line_buffering=True)
-        if hasattr(sys.stderr, "reconfigure"):
-            sys.stderr.reconfigure(line_buffering=True)
-    except (OSError, ValueError, AttributeError):
-        pass
-
-
-def guardar_en_json_acumulado(etiqueta):
-    try:
-        if ETIQUETAS_JSON.exists():
-            with open(ETIQUETAS_JSON, 'r', encoding='utf-8') as f:
-                etiquetas = json.load(f)
-        else:
-            etiquetas = []
-        etiquetas.append(etiqueta)
-        with open(ETIQUETAS_JSON, 'w', encoding='utf-8') as f:
-            json.dump(etiquetas, f, ensure_ascii=False, indent=2)
-    except Exception as e:
-        safe_print(f"    [WARN] Error guardando: {e}")
-
-
-# ─── Cliente desde Mesa_1.txt ────────────────────────────────────────────────
+# ============================================================================
+# UTILIDADES
+# ============================================================================
 
 def cargar_clientes_map(path):
     mapa = {}
@@ -166,52 +115,6 @@ def cargar_clientes_map(path):
             mapa[codigo] = nome
     return mapa
 
-
-def _maestro_por_codigo(maestro, codigo_plu):
-    """Resuelve fila art2: mismo string, o sin ceros a la izquierda (00051 → 51)."""
-    if not maestro or not codigo_plu:
-        return None
-    c = str(codigo_plu).strip()
-    if c in maestro:
-        return maestro[c]
-    if c.isdigit():
-        try:
-            k = str(int(c, 10))
-            if k in maestro:
-                return maestro[k]
-        except ValueError:
-            pass
-    return None
-
-
-def _normalizar_especie_3(val):
-    """
-    Código de especie de 3 letras (p. ej. FAO alpha-3 interno: BRF, HKE, MNZ).
-    Solo acepta exactamente tres letras A-Z.
-    """
-    if val is None:
-        return ""
-    s = str(val).strip().upper()
-    if len(s) == 3 and s.isalpha():
-        return s
-    return ""
-
-
-def _buscar_especie_por_producto(maestro, producto, nombre_cientifico):
-    """Busca código de 3 letras en art2 por nombre comercial o científico."""
-    if not maestro:
-        return ""
-    prod_upper = (producto or "").upper()
-    cient_upper = (nombre_cientifico or "").upper()
-    for row in maestro.values():
-        esp = row.get("especie") or ""
-        nom_ci = row.get("nombre_cientifico") or ""
-        if esp and len(esp) == 3 and esp.isalpha():
-            if prod_upper in nom_ci.upper() or nom_ci.upper() in prod_upper:
-                return esp
-    return ""
-
-
 def extraer_cliente_de_mesa():
     if not MESA_1_TXT.exists():
         return ""
@@ -234,9 +137,6 @@ def extraer_cliente_de_mesa():
     clientes_map = cargar_clientes_map(CLIENTES_SQL)
     return clientes_map.get(codigo, "")
 
-
-# ─── Maestro de productos ────────────────────────────────────────────────────
-
 def cargar_maestro_articulos():
     mapeo = {}
     if not ART2_SQL.exists():
@@ -252,23 +152,39 @@ def cargar_maestro_articulos():
             codigo = parts[1].strip()
             if not codigo:
                 continue
-            esp3 = ""
-            if len(parts) > 12:
-                esp3 = _normalizar_especie_3(parts[12])
             mapeo[codigo] = {
                 "nombre_cientifico": parts[13].strip(),
                 "zona_captura": parts[8].strip(),
                 "presentacion": parts[9].strip(),
                 "arte_pesca": parts[16].strip() if len(parts) > 16 else "",
-                "codigo_alfa": esp3,
                 "prod_nome": parts[6].strip() if len(parts) > 6 else "",
             }
     except:
         pass
     return mapeo
 
+def _normalizar_especie_3(val):
+    if val is None:
+        return ""
+    s = str(val).strip().upper()
+    if len(s) == 3 and s.isalpha():
+        return s
+    return ""
 
-# ─── etiqreg (solo para peso y lote de hoy) ────────────────────────────────
+def _maestro_por_codigo(maestro, codigo_plu):
+    if not maestro or not codigo_plu:
+        return None
+    c = str(codigo_plu).strip()
+    if c in maestro:
+        return maestro[c]
+    if c.isdigit():
+        try:
+            k = str(int(c, 10))
+            if k in maestro:
+                return maestro[k]
+        except ValueError:
+            pass
+    return None
 
 def cargar_etiqreg_ultimo():
     if not ETIQREG_SQL.exists():
@@ -297,7 +213,6 @@ def cargar_etiqreg_ultimo():
                 "bruto": parts[9].strip(),
                 "prod_nome": parts[6].strip() if len(parts) > 6 else "",
             }
-            # etiqreg: txt4 (índice 14) = siglas de especie, p. ej. BRF, HKE, MNZ
             if len(parts) > 14:
                 e3 = _normalizar_especie_3(parts[14])
                 if e3:
@@ -308,12 +223,14 @@ def cargar_etiqreg_ultimo():
     return None
 
 
-# ─── RES (datos del QR) ─────────────────────────────────────────────────────
+# ============================================================================
+# PARSEAR RES
+# ============================================================================
 
 def parsear_res():
     res_files = []
     for i in range(20):
-        res_file = PROGRAMA_DIR / f"RES{i:02d}"
+        res_file = DATOS_DIR / f"RES{i:02d}"
         if res_file.exists() and res_file.is_file():
             res_files.append((res_file.stat().st_mtime, res_file))
 
@@ -369,24 +286,12 @@ def parsear_res():
             datos["lote"] = txt.split(":", 1)[1].strip()
         elif txt_upper.startswith("BUQUE:") and "buque" not in datos:
             datos["buque"] = txt.split(":", 1)[1].strip()
-        elif txt_upper.startswith("F.CADUCIDAD:") or txt_upper.startswith("FECHA CADUCIDAD:"):
-            if "fecha_caducidad" not in datos:
-                # Buscar fecha en este item o en los siguientes
-                found = False
-                for j in range(i, min(i+3, len(textos_items))):
-                    for parte in textos_items[j].split():
-                        if re.match(r"\d{2}-\d{2}-\d{4}", parte):
-                            datos["fecha_caducidad"] = parte
-                            found = True
-                            break
-                    if found:
-                        break
 
-    VALORES_METODO_PRODUCCION = ("CAPTURADO", "CRIA", "AGUA DULCE", "PECHE", "PECHE", "PÊCHE EXTRAVTIVE")
+    VALORES_METODO = ("CAPTURADO", "CRIA", "AGUA DULCE", "PECHE", "PECHE", "PÊCHE EXTRAVTIVE")
     if "metodo_produccion" not in datos:
         for txt in textos_items:
             txt_upper = txt.upper().strip()
-            for vm in VALORES_METODO_PRODUCCION:
+            for vm in VALORES_METODO:
                 if txt_upper == vm:
                     datos["metodo_produccion"] = txt.strip()
                     break
@@ -396,7 +301,9 @@ def parsear_res():
     return datos
 
 
-# ─── Extraer peso del EMF ────────────────────────────────────────────────────
+# ============================================================================
+# EXTRAER PESO DEL EMF
+# ============================================================================
 
 def extraer_peso_del_emf(data):
     if not data or len(data) < 100:
@@ -424,10 +331,12 @@ def extraer_peso_del_emf(data):
     return None
 
 
-# ─── Procesar ───────────────────────────────────────────────────────────────
+# ============================================================================
+# PROCESAR TRABAJO
+# ============================================================================
 
 def procesar_trabajo(job_id, doc_name, size, pages):
-    safe_print(f"\n>>> TRABAJO {job_id}")
+    safe_print(f">>> TRABAJO {job_id}: {doc_name}")
 
     spool_dir = Path(os.environ['WINDIR']) / 'System32' / 'spool' / 'PRINTERS'
     spl_file = spool_dir / f"FP{job_id:05d}.SPL"
@@ -445,24 +354,20 @@ def procesar_trabajo(job_id, doc_name, size, pages):
         "timestamp": datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S"),
     }
 
-    # Fuentes de datos
     datos_res = parsear_res()
     reg_etiqreg = cargar_etiqreg_ultimo()
     maestro = cargar_maestro_articulos()
 
     datos = {}
 
-    # Peso del EMF (prioridad 1)
     peso_emf = extraer_peso_del_emf(emf_data) if emf_data else None
     if peso_emf:
         datos["peso_neto"] = peso_emf
 
-    # Datos del QR/RES
     for k, v in datos_res.items():
         if v:
             datos[k] = v
 
-    # Datos de etiqreg (solo para enriquecer)
     if reg_etiqreg:
         if not datos.get("peso_neto") and reg_etiqreg.get("neto") and reg_etiqreg["neto"] != "0":
             try:
@@ -478,109 +383,109 @@ def procesar_trabajo(job_id, doc_name, size, pages):
         if reg_etiqreg.get("prod_nome"):
             datos["prod_nome"] = reg_etiqreg["prod_nome"]
 
-    # Maestro de articulos
     m = _maestro_por_codigo(maestro, datos.get("codigo_plu"))
     if m:
         for k, v in m.items():
             if v and not datos.get(k):
                 datos[k] = v
 
-    # Siempre: especie_3 desde las últimas 3 letras del lote (anula cualquier valor previo)
     lote = datos.get("lote") or ""
-    e3 = ""
     if len(lote) >= 6:
         e3 = _normalizar_especie_3(lote[-3:])
-    if e3:
-        datos["codigo_alfa"] = e3
-    elif not datos.get("codigo_alfa"):
-        # Lote sin especie (solo fecha como 180426), buscar en art2 por producto
-        especie_from_maestro = _buscar_especie_por_producto(maestro, datos.get("producto"), datos.get("nombre_cientifico"))
-        if especie_from_maestro:
-            datos["codigo_alfa"] = especie_from_maestro
+        if e3:
+            datos["codigo_alfa"] = e3
 
-    # Cliente desde Mesa_1.txt (prioridad)
     cliente = extraer_cliente_de_mesa()
     if cliente:
         datos["cliente"] = cliente
 
     etiqueta["datos"] = datos
 
-    guardar_en_json_acumulado(etiqueta)
-    safe_print(
-        f"    [OK] cliente={datos.get('cliente','')}, producto={datos.get('producto','')}, "
-        f"especie_3={datos.get('especie_3','')}"
-    )
+    # Guardar en JSON acumulado
+    try:
+        if ETIQUETAS_JSON.exists():
+            with open(ETIQUETAS_JSON, 'r', encoding='utf-8') as f:
+                etiquetas = json.load(f)
+        else:
+            etiquetas = []
+        etiquetas.append(etiqueta)
+        with open(ETIQUETAS_JSON, 'w', encoding='utf-8') as f:
+            json.dump(etiquetas, f, ensure_ascii=False, indent=2)
+    except Exception as e:
+        safe_print(f"    [WARN] Error guardando: {e}")
+
+    safe_print(f"    [OK] cliente={datos.get('cliente','')}, producto={datos.get('producto','')}")
 
     return etiqueta
 
 
-# ─── Main ────────────────────────────────────────────────────────────────────
+# ============================================================================
+# MAIN
+# ============================================================================
 
 def main():
-    configurar_salida_consola_en_vivo()
+    print("=" * 50)
+    print("MONITOR ETIQUETAS CACHANPESCA")
+    print("=" * 50)
 
-    print("=" * 50, flush=True)
-    print("MONITOR ETIQUETAS CACHANPESCA", flush=True)
-    print("=" * 50, flush=True)
-
+    # Verificar permisos
     spool_dir = Path(os.environ['WINDIR']) / 'System32' / 'spool' / 'PRINTERS'
     try:
         test_file = spool_dir / "test.txt"
         with open(test_file, 'w') as f:
             f.write("test")
         test_file.unlink()
-        print("[OK] Permisos OK", flush=True)
+        print("[OK] Permisos de administrador OK")
     except:
-        print("[ERROR] Sin permisos de administrador", flush=True)
+        print("[ERROR] Necesita permisos de administrador")
+        print("  Haz clic derecho > Ejecutar como administrador")
         return 1
 
-    print(f"\nSalida: {ETIQUETAS_JSON}\n", flush=True)
+    # Verificar que existen los directorios de datos
+    if not DATOS_DIR.exists():
+        print(f"[ERROR] No existe: {DATOS_DIR}")
+        print("  Edita DATOS_DIR en el archivo para apuntar a tu carpeta HVETIQ")
+        return 1
 
-    # Ignorar trabajos existentes en cola
+    print(f"\nDatos: {DATOS_DIR}")
+    print(f"Salida: {ETIQUETAS_JSON}\n")
+
+    # Cargar jobs ya procesados
+    seen = cargar_jobs_procesados()
+    safe_print(f"[INFO] Jobs procesados previamente: {len(seen)}")
+
+    # WMI query
     wmi_init = win32com.client.Dispatch("WbemScripting.SWbemLocator")
     ns_init = wmi_init.ConnectServer(".", "root\\cimv2")
-    existing = ns_init.ExecQuery("SELECT * FROM Win32_PrintJob WHERE Name LIKE '%Godex%' AND JobId > 0")
-    existing_ids = {j.Properties_.Item('JobId').Value for j in existing}
-    safe_print(f"[INFO] Ignorando {len(existing_ids)} trabajos en cola\n")
-
-    # Cargar jobs ya procesados desde archivo (evita duplicados en reinicios)
-    seen = cargar_jobs_procesados()
-    seen.update(existing_ids)
-    safe_print(f"[INFO] Jobs procesados previamente: {len(seen)}\n")
 
     while True:
         try:
-            wmi = win32com.client.Dispatch("WbemScripting.SWbemLocator")
-            ns = wmi.ConnectServer(".", "root\\cimv2")
-            jobs = ns.ExecQuery("SELECT * FROM Win32_PrintJob WHERE Name LIKE '%Godex%' AND JobId > 0")
+            jobs = ns_init.ExecQuery(
+                f"SELECT * FROM Win32_PrintJob WHERE Name LIKE '%{IMPRESORA_NOMBRE}%' AND JobId > 0"
+            )
 
             for job in jobs:
                 try:
                     job_id = job.Properties_.Item('JobId').Value
                     doc = job.Properties_.Item('Document').Value or "Unknown"
-                    size = job.Properties_.Item('Size').Value or 0
-                    pages = job.Properties_.Item('TotalPages').Value or 0
 
-                    # Ignorar si ya fue procesado este job_id
                     if job_id in seen:
                         continue
 
-                    # Verificar si el archivo SPL ya fue procesado
                     spl_file = spool_dir / f"FP{job_id:05d}.SPL"
                     if spl_file.exists():
-                        # Esperar a que termine de escribirse (mover el archivo indica impresion completa)
                         time.sleep(0.5)
 
                     seen.add(job_id)
                     guardar_jobs_procesados(seen)
-                    procesar_trabajo(job_id, doc, size, pages)
+                    procesar_trabajo(job_id, doc, 0, 0)
                 except:
                     pass
 
             time.sleep(1)
 
         except KeyboardInterrupt:
-            print("\n\nDetenido.", flush=True)
+            print("\nDetenido.")
             break
         except Exception as e:
             safe_print(f"[ERROR] {e}")
